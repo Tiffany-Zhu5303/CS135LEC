@@ -1,6 +1,5 @@
-/*
-Author: Tiffany Zhu 
-Course: CSCI-135
+//Author: Tiffany Zhu 
+/*Course: CSCI-135
 Instructor: Tong Yi 
 Assignment: HW E1.7
 
