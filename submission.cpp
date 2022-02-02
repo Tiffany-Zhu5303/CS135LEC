@@ -1,11 +1,10 @@
 //Author: Tiffany Zhu 
-/*Course: CSCI-135
-Instructor: Tong Yi 
-Assignment: HW E1.7
+//Course: CSCI-135
+//Instructor: Tong Yi 
+//Assignment: HW E1.7
 
-To have an input of three different names and to print each name on a separate line.
+//To have an input of three different names and to print //each name on a separate line.
 
-*/
 #include <iostream>
 using namespace std;
 
