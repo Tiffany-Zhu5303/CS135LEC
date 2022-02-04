@@ -1,26 +1,34 @@
 //Author: Tiffany Zhu 
 //Course: CSCI-135
 //Instructor: Tong Yi 
-//Assignment: HW E1.7
+//Assignment: HW E2.10
 
-//To have an input of three different names and to print //each name on a separate line.
-
+//program asks user to input gallons of gas in tank, miles
+//per gallon, and price of gas per gallon
+//Then program prints the cost per 100 miles and how far the 
+//car can go
 #include <iostream>
 using namespace std;
 
 int main(){
-  string name1, name2, name3;
+    float gallons, miles_per_gallon, cost_per_gallon; 
 
-  cout << "Enter the first name ";
-  cin >> name1;
+    cout << "gallons of gas are in the tank: ";
+    cin >> gallons;
 
-  cout << "Enter the second name ";
-  cin >> name2;
+    cout << "Miles per gallon: ";
+    cin >> miles_per_gallon;
 
-  cout << "Enter the third name ";
-  cin >> name3;
+    cout << "Cost per gallon: ";
+    cin >> cost_per_gallon;
 
-  cout << name1 << "\n" << name2 << "\n" << name3;
-
-  return 0;
+    float total_cost_miles, cost_per_mile, total_miles;
+    total_cost_miles = cost_per_gallon * miles_per_gallon;
+    cost_per_mile = total_cost_miles / 100;
+    total_miles = gallons * miles_per_gallon;
+    
+    cout << "The cost per 100 miles is " << cost_per_mile << ".\n";
+    cout << "The car can travel " << total_miles << " miles.";
+    
+    return 0;
 }
