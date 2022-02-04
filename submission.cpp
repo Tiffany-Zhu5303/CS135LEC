@@ -13,7 +13,7 @@ using namespace std;
 int main(){
     float gallons, miles_per_gallon, cost_per_gallon; 
 
-    cout << "gallons of gas are in the tank: ";
+    cout << "gallons of gas in the tank: ";
     cin >> gallons;
 
     cout << "Miles per gallon: ";
@@ -22,12 +22,12 @@ int main(){
     cout << "Cost per gallon: ";
     cin >> cost_per_gallon;
 
-    float total_cost_miles, cost_per_mile, total_miles;
-    total_cost_miles = cost_per_gallon * miles_per_gallon;
-    cost_per_mile = total_cost_miles / 100;
-    total_miles = gallons * miles_per_gallon;
+    float cost_per_100mi, total_miles;
+
+    cost_per_100mi = (100 / miles_per_gallon) * cost_per_gallon;
+    total_miles = miles_per_gallon * gallons;
     
-    cout << "The cost per 100 miles is " << cost_per_mile << ".\n";
+    cout << "The cost per 100 miles is " << cost_per_100mi << ".\n";
     cout << "The car can travel " << total_miles << " miles.";
     
     return 0;
