@@ -1,9 +1,9 @@
 //Author: Tiffany Zhu 
 //Course: CSCI-135
 //Instructor: Tong Yi 
-//Assignment: Project 1
+//Assignment: Project 1 - Task D
 
-//To have an input of three different names and to print //each name on a separate line.
+//To have a calculator program that can add, subtract, and square multiple equations.
 
 #include <iostream>
 using namespace std;
