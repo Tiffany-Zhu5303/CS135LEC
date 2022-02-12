@@ -1,3 +1,10 @@
+//Author: Tiffany Zhu 
+//Course: CSCI-135
+//Instructor: Tong Yi 
+//Assignment: Project 1
+
+//To have an input of three different names and to print //each name on a separate line.
+
 #include <iostream>
 using namespace std;
 
@@ -11,37 +18,7 @@ int main(){
 
   cin >> num;
   
-  /*while (cin >> operation){
-
-    cout << operation;
-    
-    if (operation == '+' && squared > 0){
-      sum = sum + squared;
-      squared = 0;
-    }else if(operation == '+'){
-      cin >> num;
-      sum = sum + num;
-    }else if (operation == '-' && squared > 0){
-      sum = sum - squared;
-      squared = 0;
-    }else if(operation == '-'){
-      cin >> num;
-    }else if (operation == '^'){
-      squared = num * num;
-    }else if (operation == ';' && squared > 0){
-      sum = sum + squared;
-      cout << sum << "\n";
-      squared = 0;
-      cin >> num;
-      sum = num;
-    }else if (operation == ';'){
-      cout << sum << "\n";
-      cin >> num;
-      sum = num;
-    }
-  }*/
-
-   while (cin >> operation){
+ while (cin >> operation){
 
      //cout << operation;
     
