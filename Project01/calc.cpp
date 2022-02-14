@@ -1,3 +1,10 @@
+//Author: Tiffany Zhu 
+//Course: CSCI-135
+//Instructor: Tong Yi 
+//Assignment: Project 1 - Task B
+
+//To have a calculator program that can add and subtract an equation
+
 #include <iostream>
 #include <string>
 using namespace std;
