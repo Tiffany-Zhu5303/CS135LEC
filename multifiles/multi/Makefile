@@ -1,13 +1,24 @@
+#Object = variable
+OBJECTS=main.o utils.o adders.o 
+CXX=g++
+#turn on all the warnings
+CXXFLAGS=-Wall
+#if you need a library or some debugging code
+LDFLAGS=-lm
+
 main: main.o utils.o adders.o
-	g++ -o main main.o utils.o adders.o
+	$(CXX) $(CXXFLAGS)  $(LDFLAGS) -o main $(OBJECTS)
+
 main.o: main.cpp utils.h adders.h
-	g++ -c main.cpp
+	g++ $(CXXFLAGS) -c main.cpp
+
 adders.o: adders.cpp adders.h
-	g++ -c adders.cpp
+	g++ $(CXXFLAGS) -c adders.cpp
+
 utils.o: utils.cpp utils.h adders.h
-	g++ -c utils.cpp
+	g++ $(CXXFLAGS) -c utils.cpp
 clean:
-	rm -f main.o adders.o utils.o
+	rm -f $(OBJECTS)
 help:
 	@echo "Targets:"
 	@echo " main"
