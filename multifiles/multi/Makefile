@@ -24,3 +24,5 @@ help:
 	@echo " main"
 	@echo " clean"
 	@echo " help"
+
+#g++ -- MM gives all the dependencies that you can paste into the Makefile

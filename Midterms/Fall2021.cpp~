@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+  //Q1: What is the value of 6 / 5 * r * r * r when variable r is 2 in C++?
+  int r = 2;
+
+  cout << 6 / 5 * r * r * r << endl;
+
+  //Q3:
+  int value = rand() % 100 + 5;
+
+  cout << value << endl;
+  cout << rand() % 100 + 5 << endl;
+  //rand() % (end - start + 1) + start;
+  
+  return 0;
+}
+
+/*
+Q2: Declare function foo whose input parameter is int and return is a string.
+ You just need to write the function header, no implementation is needed.
+
+-string foo(int) -> pass by value, formal parameter not named
+-string foo(int&) -> pass by reference, formal parameter not named
+-string foo(int num) -> pass by value, formal parameternot named
+-string foo(int& num) -> pass by value, formal parameter named
+
+*/

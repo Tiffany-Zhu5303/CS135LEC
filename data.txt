@@ -1,0 +1,10 @@
+Red FF0000
+Orange FF8000
+Yellow FFFF00
+Green 00FF00
+Light Blue 00FFFF
+Blue 0000FF
+Purple FF00FF
+Gray 808080
+White FFFFFF
+Black 000000

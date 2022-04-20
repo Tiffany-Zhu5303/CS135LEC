@@ -6,73 +6,53 @@
 //To have a calculator program that can add, subtract, and square multiple equations.
 
 #include <iostream>
+#include <string>
 using namespace std;
 
 int main(){
   int sum = 0;
-  int num;
-  int squared = 0;
-  int remnum = 0;
-  char operation;
-  char remsign = ' ';
+  int num, remNum;
+  char operation = '+';
+  char get;
 
-  cin >> num;
-  
- while (cin >> operation){
+  while(cin >> num){
 
-     //cout << operation;
-    
-    if (operation == '+' && squared > 0 && remsign == '+'){
-      sum = sum + squared + remnum;
-      remnum = 0;
-      squared = 0;
-      remsign = '+';
-      cin >> num;
-    }else if (operation == '+' && squared > 0 && remsign == '-'){
-      sum = sum - squared + remnum;
-      //cout << sum << "For the second equation, this should be 1011\n";
-      remnum = 0;
-      squared = 0;
-      remsign = '+';
-      cin >> num;
-    }else if(operation == '+'){
-      cin >> num; // next num w/ remnum
-      //cout << num << "this should be 6\n";
-      remsign = '+';
-    }else if (operation == '-' && squared > 0 && remsign == '+'){
-      sum = sum + squared + remnum; //second equation
-      // cout << sum << "this should be 1000 + 36\n";
-      remnum = 0;
-      squared = 0;
-      remsign = '-';
-      cin >> num;
-    }else if (operation == '-' && squared > 0 && remsign == '-'){
-      sum = sum - squared + remnum;
-      remnum = 0;
-      squared = 0;
-      remsign = '-';
-      cin >> num;
-    }else if(operation == '-'){
-      cin >> num;
-      remsign = '-';
-    }else if (operation == '^'){
-      squared = num * num; //second equation
-      // cout << squared << "the first one should be 36 and the second should be 25\n";
-    }else if (operation == ';' && squared > 0){
-      sum = sum + squared;
-      cout << sum << "\n";
-      squared = 0;
-      cin >> num;
-      sum = 0;
-      remnum = num;
-    }else if (operation == ';'){ //after 5^ -> 1000
-      sum = sum + num;
-      cout << sum << "\n";
-      cin >> num;
-      sum = 0;
-      remnum = num;
+           //check to see if it is + or -
+        if (operation == '+'){
+            remNum = num; //store the number
+	    //gets the next char
+            get = cin.get();
+            if (get == '^'){
+	      //square the number 
+                remNum = remNum * remNum;
+            }
+            else {
+	      //return the next term
+                cin.putback(get);
+            }
+
+            sum += remNum;
+        }
+        else if (operation == '-'){
+            remNum = num;
+            get = cin.get();
+            if (get == '^'){
+                remNum = remNum * remNum;
+            }
+            else {
+                cin.putback(get);
+            }
+            sum -= remNum;
+        }
+
+        cin >> operation;
+
+        if (operation == ';'){
+            cout << sum << endl;
+            operation = '+';
+            sum = 0; //reset the sum back to 0 so the current sum isn't added onto for the next line
+        }
+        
     }
-  }
-  
-  return 0;
+
 }
