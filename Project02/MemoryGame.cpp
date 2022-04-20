@@ -37,7 +37,7 @@ MemoryGame::MemoryGame() //default constructor,
     //generate three random ints in [0, 1000),
     //randomly set them in the layout of the spaces,
     //that is, set up values array.
-    string value[numPairs];
+    string value[numSlots];
     values = value;
     srand(time(0));
 
@@ -60,7 +60,7 @@ MemoryGame::MemoryGame() //default constructor,
 
     values = finalArr;
 
-    cout << "this is the final array" << endl;
+    //cout << "this is the final array" << endl;
     for(int i = 0; i < numSlots; i ++){
       cout << values[i] << endl;
       }
@@ -93,7 +93,7 @@ int* randomize(int size)
   
   for(int i = 0; i < size; i++){
     permArr[i] = i;
-  }
+    }
   
     //generate a random int in [0, 5), say 3 again,
     //then swap arr[3], which is 5 now, with arr[4], 
@@ -178,12 +178,8 @@ void MemoryGame::display(bool* bShown)
 //(3) Finish until every pair are chosen correctly.
 void MemoryGame::play()
 {
-  
-  /*bool done = false;
-
-  while(done == false;{
   int num;
-  cout << "Pick a cell to flip: " << endl;
+  cout << "\nPick a cell to flip: " << endl;
   cin >> num;
-  */
+  
 }
