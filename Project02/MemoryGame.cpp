@@ -37,29 +37,33 @@ MemoryGame::MemoryGame() //default constructor,
     //generate three random ints in [0, 1000),
     //randomly set them in the layout of the spaces,
     //that is, set up values array.
-    string value[numSlots];
+    string value[numPairs];
     values = value;
+    srand(time(0));
 
-    for(int i = 0; i < (numSlots - 2) / 2; i++){
-      values[i] = to_string(rand() % 1000);
+    for(int i = 0; i < numPairs; i++){
+      *(values + i) = to_string(rand() % 1000);
     }
 
     int* perm = randomize(numSlots);
 
     string finalArr[numSlots];
-
-    for(int i = 0; i < numSlots; i++){
-      int index = perm[i];
-      int saved = 0;
-      if(i = 0 || i % 2 == 0 && i < 6){
-	finalArr[index] = values[i/2];
-	saved ++;
-      }else if(i > 5){
-	finalArr[index] = " ";
-      }else{
-	finalArr[index] = values[saved - 1];
-      }
     
+    for(int i = 0; i < numSlots; i++){
+      cout << perm[i] << endl;
+      if(i > 5){
+	finalArr[perm[i]] = " ";
+      }else{
+	finalArr[perm[i]] = values[i/2];
+      }
+    }
+
+    values = finalArr;
+
+    cout << "this is the final array" << endl;
+    for(int i = 0; i < numSlots; i ++){
+      cout << values[i] << endl;
+      }
 }
 
 //TODO: implement by students
@@ -68,7 +72,7 @@ MemoryGame::~MemoryGame()
     //When an object is no longer in need,
     //release dynamically allocated memory by 
     //data members of the current object.
-  
+  //delete[] perm;
   
 }
 
@@ -142,11 +146,26 @@ void displaySeparateLine(int numSlots)
 //display the items in values array where bShown is true.
 void MemoryGame::display(bool* bShown)
 {
+  cout << " ";
+  
   for(int i = 0; i < numSlots; i++){
-    if(bShown[i] == true){
-      cout << bShown[i] << endl;
+    cout << setw(3) << i;
+    cout << setw(3) << " ";
+  }
+
+  std::cout << "\n";
+  displaySeparateLine(numSlots);
+  
+  for(int i = 0; i < numSlots; i++){
+    cout << "|";
+    
+    if(bShown[i]){
+      cout << setw(5) << values[i];
+    }else{
+      cout << setw(5) << "";
     }
   }
+  cout << "|";
 
 }
 
@@ -159,8 +178,12 @@ void MemoryGame::display(bool* bShown)
 //(3) Finish until every pair are chosen correctly.
 void MemoryGame::play()
 {
+  
+  /*bool done = false;
+
+  while(done == false;{
   int num;
   cout << "Pick a cell to flip: " << endl;
   cin >> num;
-
+  */
 }
