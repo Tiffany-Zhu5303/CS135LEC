@@ -7,8 +7,8 @@
 #include <string>
 using namespace std;
 
-int* randomize(int numSlots); //function to randomize layout
 void swap(int* arr, int i, int j);
+int* randomize(int numSlots); //function to randomize layout
 void displaySeparateLine(int numSlots);
 
 //TODO: implement by students
@@ -19,14 +19,14 @@ MemoryGame::MemoryGame() //default constructor,
     //Note that 2 added after 2 * numPairs means number of 
     //two extra blocks without actual data.
 {
-    //srand(time(NULL)); //TODO: uncomment this line to see
+  srand(time(NULL)); //TODO: uncomment this line to see
         //different layouts of numbers in different runnings.
         //time(NULL) is the current running time.
         //use the current running time to grow random sequence
         //Since running time differs,
         //the random sequence looks different
         //at different running time.
-    srand(1); //TODO: add this before submitting to gradescope,
+  //srand(1); //TODO: add this before submitting to gradescope,
         //or autograde script cannot handle random input.
 
     //TODO: your code here
@@ -37,8 +37,8 @@ MemoryGame::MemoryGame() //default constructor,
     //generate three random ints in [0, 1000),
     //randomly set them in the layout of the spaces,
     //that is, set up values array.
-    string value[numSlots];
-    values = value;
+    //string value[numSlots];
+    values = new string[numSlots];
     srand(time(0));
 
     for(int i = 0; i < numPairs; i++){
@@ -47,23 +47,21 @@ MemoryGame::MemoryGame() //default constructor,
 
     int* perm = randomize(numSlots);
 
-    string finalArr[numSlots];
+    string* finalArr = new string[numSlots];
     
     for(int i = 0; i < numSlots; i++){
-      cout << perm[i] << endl;
-      if(i > 5){
-	finalArr[perm[i]] = " ";
+      if(i > numPairs * 2){
+	finalArr[perm[i]] = "";
       }else{
 	finalArr[perm[i]] = values[i/2];
       }
     }
 
+    delete[] values;
     values = finalArr;
 
-    //cout << "this is the final array" << endl;
-    for(int i = 0; i < numSlots; i ++){
-      cout << values[i] << endl;
-      }
+    delete[] perm;
+    perm = nullptr;
 }
 
 //TODO: implement by students
@@ -72,8 +70,22 @@ MemoryGame::~MemoryGame()
     //When an object is no longer in need,
     //release dynamically allocated memory by 
     //data members of the current object.
-  //delete[] perm;
-  
+
+  delete[] values;
+}
+
+//TODO: implement by students
+//int* arr means int array arr, which implies the address
+//of the first element of array arr.
+//swap arr[i] and arr[j] in array of ints arr.
+void swap(int *arr, int i, int j)
+{
+  int first = arr[i];
+  int second = arr[j];
+
+  arr[i] = second;
+  arr[j] = first;
+
 }
 
 //TODO: implement by students
@@ -112,20 +124,6 @@ int* randomize(int size)
   return permArr;
 }
 
-//TODO: implement by students
-//int* arr means int array arr, which implies the address
-//of the first element of array arr.
-//swap arr[i] and arr[j] in array of ints arr.
-void swap(int *arr, int i, int j)
-{
-  int first = arr[i];
-  int second = arr[j];
-
-  arr[i] = second;
-  arr[j] = first;
-
-}
-
 //Display -----+ for numSlots times.
 //Add an extra + when for the first block (when index i is 0).
 //So suppose numSlots is 8, we get
@@ -153,19 +151,22 @@ void MemoryGame::display(bool* bShown)
     cout << setw(3) << " ";
   }
 
-  std::cout << "\n";
-  displaySeparateLine(numSlots);
+  std::cout << "  \n";
+  displaySeparateLine(numSlots);  
   
   for(int i = 0; i < numSlots; i++){
     cout << "|";
     
-    if(bShown[i]){
+    if(bShown[i] == true){
       cout << setw(5) << values[i];
     }else{
       cout << setw(5) << "";
     }
   }
   cout << "|";
+
+  std::cout << "\n";
+  displaySeparateLine(numSlots);
 
 }
 
@@ -178,8 +179,70 @@ void MemoryGame::display(bool* bShown)
 //(3) Finish until every pair are chosen correctly.
 void MemoryGame::play()
 {
-  int num;
-  cout << "\nPick a cell to flip: " << endl;
-  cin >> num;
+  MemoryGame game;
   
+  int pairsFound = 0;
+  int numFlips = 0;
+  bool bShown[numSlots];
+  int index, first;
+  bool round = true;
+  int steps = 0;
+
+  for(int i = 0; i < numSlots; i++){
+    bShown[i] = false;
+  }
+
+  while(pairsFound < numPairs){
+    if(round == true){
+      game.display(bShown);
+
+      cout << "Pick a cell to flip: " << endl;
+      cin >> index;
+
+      while(index >= numSlots || index < 0){
+	cout << "index needs to be in range of [0, 7]\nPick a cell to flip: " << endl;
+	cin >> index;
+      }
+
+      if(values[index] != ""){
+	bShown[index] = true;
+	first = index;
+	round = false;
+      }
+      
+    }else{
+      game.display(bShown);
+
+      cout << "Pick a cell to flip: " << endl;
+      cin >> index;
+
+      while(index >= numSlots || index < 0){
+       cout << "index needs to be in range [0, 7]\nRe-enter an index: " << endl;
+       cin >> index;
+      }
+
+      while(index == first){
+       cout << "The cell at index " << index << " is shown.\nRe-enter an index: " << endl;
+       cin >> index;
+      }
+
+      if(values[index] == values[first]){
+	pairsFound += 1;
+	bShown[index] = true;
+      }else{
+	for(int i = 0; i < numSlots; i++){
+	  bShown[i] = false;
+	  pairsFound = 0;
+	}
+	
+      }
+
+      round = true;
+    }
+
+    steps++;
+  }
+
+  cout << "Congratulations! You took " << steps << " to find all matched pairs." << endl;
+      
 }
