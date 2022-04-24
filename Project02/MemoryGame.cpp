@@ -26,7 +26,7 @@ MemoryGame::MemoryGame() //default constructor,
         //Since running time differs,
         //the random sequence looks different
         //at different running time.
-  //srand(1); //TODO: add this before submitting to gradescope,
+  srand(1); //TODO: add this before submitting to gradescope,
         //or autograde script cannot handle random input.
 
     //TODO: your code here
@@ -39,7 +39,7 @@ MemoryGame::MemoryGame() //default constructor,
     //that is, set up values array.
     //string value[numSlots];
     values = new string[numSlots];
-    srand(time(0));
+    //srand(time(0));
 
     for(int i = 0; i < numPairs; i++){
       *(values + i) = to_string(rand() % 1000);
@@ -50,7 +50,7 @@ MemoryGame::MemoryGame() //default constructor,
     string* finalArr = new string[numSlots];
     
     for(int i = 0; i < numSlots; i++){
-      if(i > numPairs * 2){
+      if(i >= numPairs * 2){
 	finalArr[perm[i]] = "";
       }else{
 	finalArr[perm[i]] = values[i/2];
@@ -112,9 +112,9 @@ int* randomize(int size)
     //get 0, 1, 2, 4, 5, 3
   
   for(int i = size; i > 0; i--){
-    int index = rand() % size;
+    int index = rand() % i;
     
-    swap(permArr, index, size - 1);
+    swap(permArr, index, i - 1);
   }
     //generate a random int in [0, 4), say 2,
     //swap arr[2] with the current arr[3]
@@ -151,7 +151,7 @@ void MemoryGame::display(bool* bShown)
     cout << setw(3) << " ";
   }
 
-  std::cout << "  \n";
+  std::cout << "\n";
   displaySeparateLine(numSlots);  
   
   for(int i = 0; i < numSlots; i++){
@@ -183,17 +183,48 @@ void MemoryGame::play()
   
   int pairsFound = 0;
   int numFlips = 0;
-  bool bShown[numSlots];
-  int index, first;
-  bool round = true;
-  int steps = 0;
+  bool* bShown = new bool[numSlots];
+  int index;
+  int first = -1;
+  //bool round = true;
 
   for(int i = 0; i < numSlots; i++){
     bShown[i] = false;
   }
 
+  game.display(bShown);
+
   while(pairsFound < numPairs){
-    if(round == true){
+    cout << "Pick a cell to flip: "; 
+    cin >> index;
+
+    while(bShown[index] == true || index >= numSlots || index < 0){
+      if(bShown[index] == true){
+	cout << "The cell indexed at " << index << " is shown.\nRe-enter an index: ";
+      }else if(index >= numSlots || index < 0){
+	cout << "index needs to be in range of [0, 7]\nPick a cell to flip: " << endl;
+      }
+ 
+      cin >> index;
+    }
+
+    numFlips++;
+
+    if(numFlips % 2 != 0){
+      bShown[index] = true;
+      first = index;
+    }else{
+      if(values[index] == values[first] && values[index] != ""){
+	pairsFound++;
+	bShown[index] = true;
+      }else{
+	bShown[first] = false;
+      }
+    }
+
+    game.display(bShown);
+    
+    /*if(round == true){
       game.display(bShown);
 
       cout << "Pick a cell to flip: " << endl;
@@ -240,9 +271,11 @@ void MemoryGame::play()
       round = true;
     }
 
-    steps++;
+    numFlips++;*/
   }
 
-  cout << "Congratulations! You took " << steps << " to find all matched pairs." << endl;
+  cout << "Congratulations! Take " << numFlips << " steps to find all matched pairs." << endl;
+
+  delete[] bShown;
       
 }
