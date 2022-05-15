@@ -1,0 +1,24 @@
+#include <iostream>
+
+//Question 1a: Declare class Undergraduate as a subclass of Student and inherit its
+//public members
+
+class Student{
+private:
+  std::string name;
+  int id;
+public:
+  Student(std::string stdName, int stdId);
+  std::string setName(std::string stdName);
+  int setId(int stdId);
+  std::string getName(name);
+  int getId(id);
+};
+
+class Undergraduate
+  
+
+int main(){
+
+  return 0;
+}
