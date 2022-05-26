@@ -4,7 +4,7 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
-#include <iomainip>
+#include <iomanip>
 using namespace std;
 
 //constructors
@@ -212,7 +212,7 @@ void Board::pressUp(){
             index += 2;
             row++;
             
-            if(panel[row][i] > max){
+            if(nonZeros.size() > max){
                 max = panel[row][i];
             }
             
@@ -392,12 +392,14 @@ void Board::start(){
 	cout << "Round " << setw(4) << round << ": ";
 	cout << "Press UP. " << "Goal: " << target << endl;
 	pressUp();
+	cout << "Max: " << max << endl;
 	round++;
 	break;
       case 'B':
 	cout << "Round " << setw(4) << round << ": ";
 	cout << "Press DOWN. " << "Goal: " << target << endl;
 	pressDown();
+	cout << "Max: " << max << endl;
 	round++;
 // code for arrow down
 	break;
@@ -406,6 +408,7 @@ void Board::start(){
 	cout << "Round " << setw(4) << round << ": ";
 	cout << "Press RIGHT. " << "Goal: " << target << endl;
 	pressRight();
+	cout << "Max: " << max << endl;
 	round++;
 	break;
       case 'D':
@@ -413,8 +416,9 @@ void Board::start(){
 	cout << "Round " << setw(4) << round << ": ";
 	cout << "Press LEFT. " << "Goal: " << target << endl;
 	pressLeft();
+	cout << "Max: " << max << endl;
 	round++;
-    break;
+	break;
       }
     }
   }
